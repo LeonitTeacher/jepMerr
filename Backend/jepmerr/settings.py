@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    "corsheaders",
     "Products",
     'rest_framework',
     'rest_framework.authtoken',
@@ -125,3 +126,7 @@ STATIC_URL = "static/"
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+# Corsheaders settings
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost','123.123.123']
+CORS_ORIGIN_ALLOW_ALL = True # Change it in production and specify your own origins

@@ -16,8 +16,7 @@ class ProductScreen extends Component {
 
   fetchAllProducts = async () => {
     try {
-      const response = await fetch("http://192.168.140.86/products/allProducts/");
-      print(response)
+      const response = await fetch("http://123.123.123:8000/products/allProducts/");
       const data = await response.json();
       this.setState({ products: data, loading: false });
     } catch (error) {
@@ -42,13 +41,13 @@ class ProductScreen extends Component {
     return (
       <View style={styles.container}>
         {loading ? (
-          <Text>Loading...</Text>
+          <Text style={styles.loadingText}>Loading...</Text>
         ) : (
           <FlatList
             data={products}
             renderItem={this.renderProductItem}
             keyExtractor={(item) => item.id.toString()} // Assuming products have unique IDs
-            contentContainerStyle={{ paddingBottom: 20 }}
+            contentContainerStyle={styles.productList}
           />
         )}
       </View>
@@ -59,28 +58,40 @@ class ProductScreen extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
     paddingHorizontal: 20,
+    paddingTop: 20,
+    backgroundColor: '#F5F5F5',
+  },
+  productList: {
+    paddingBottom: 20,
   },
   productItem: {
+    backgroundColor: '#FFFFFF',
     borderBottomWidth: 1,
-    borderBottomColor: '#CCCCCC',
-    paddingVertical: 10,
+    borderBottomColor: '#E0E0E0',
+    paddingVertical: 15,
+    paddingHorizontal: 10,
     marginBottom: 10,
+    borderRadius: 8,
   },
   title: {
-    fontSize: 20,
+    fontSize: 18,
     fontWeight: 'bold',
+    marginBottom: 5,
   },
   description: {
     fontSize: 14,
-    color: '#555555',
+    color: '#666666',
+    marginBottom: 5,
   },
   price: {
     fontSize: 16,
     fontWeight: 'bold',
-    marginTop: 5,
+    color: '#2196F3',
+  },
+  loadingText: {
+    fontSize: 20,
+    alignSelf: 'center',
   },
 });
 
