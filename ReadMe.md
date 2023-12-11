@@ -3,6 +3,7 @@
 3. open terminal and run command cd Backend
 4. then run .\venv\Scripts\activate
 5. to run the server run the command: py manage.py runserver 0.0.0.0:8000
+6. To deactivate venv run command: deactivate
 
 
 to run the front:
