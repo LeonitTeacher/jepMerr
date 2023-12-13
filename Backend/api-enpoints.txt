@@ -1,0 +1,14 @@
+Log in and register apis:
+
+1.To log in : http://127.0.0.1:8000/account/login/ - POST REQUEST
+2. To register : http://127.0.0.1:8000/account/register/ -POST REQUEST(username, email, password , password2)
+
+Products apis:
+
+1. To get all the products : http://127.0.0.1:8000/products/allProducts/  - GET REQUEST
+2.To get a single Product : http://127.0.0.1:8000/products/<int:pk>/ -GET REQUEST where <int:pk> is primary key of product
+3.To get all Categories : http://127.0.0.1:8000/products/allCategories/ -GET REQUEST
+4. To get a single category : http://127.0.0.1:8000/products/category/<int:pk>/ GET REQUEST
+5. To get all the stock : http://127.0.0.1:8000/products/stock/ -GET REQUEST
+6. To get a single stock : http://127.0.0.1:8000/products/stock/<int:pk>  -GET REQUEST
+6. To purchase an product : http://127.0.0.1:8000/products/purchase/ -POST/GET REQUEST
