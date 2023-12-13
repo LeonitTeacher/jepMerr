@@ -7,3 +7,21 @@
 
 
 to run the front:
+
+
+
+
+git commands:
+
+1. git add .
+2. git commit -m "comment"
+3. git push origin name
+4. Go to github google pull request 
+5. click compare and pull request 
+6. create pull request
+7. shiko nese ka konfilkte. check for conflict. 
+8. MERGE
+9. Visual studio terminal git checkout main
+10. git pull origin main
+11. git checkout te branchi yt
+
