@@ -1,5 +1,14 @@
 import React, { useState } from 'react';
-import { View, Text, Button, Image, StyleSheet, TouchableOpacity, Modal,ScrollView } from 'react-native';
+import {
+  View,
+  Text,
+  Button,
+  Image,
+  StyleSheet,
+  TouchableOpacity,
+  Modal,
+  ScrollView,
+} from 'react-native';
 
 const items = [
   { id: 1, name: 'Item 1', price: '$10', quantity: 1, image: 'https://www.bootdey.com/image/280x280/00FFFF/000000' },
@@ -57,55 +66,72 @@ const ShoppingCart = () => {
   };
 
   return (
-    <ScrollView style={styles.ScrollView}>
-    <View style={styles.container}>
-      <Text style={styles.title}>Shopping Cart</Text>
-      {cartItems.map((item) => (
-        <TouchableOpacity key={item.id} onPress={() => handleItemPress(item)}>
-          <View style={styles.itemContainer}>
-            <Image source={{ uri: item.image }} style={styles.image} />
-            <View style={styles.infoContainer}>
-              <Text style={styles.name}>{item.name}</Text>
-              <Text style={styles.price}>{item.price}</Text>
+    <ScrollView style={styles.scrollView}>
+      <View style={styles.container}>
+        <Text style={styles.title}>Shopping Cart</Text>
+        {cartItems.map((item) => (
+          <TouchableOpacity key={item.id} onPress={() => handleItemPress(item)}>
+            <View style={styles.itemContainer}>
+              <Image source={{ uri: item.image }} style={styles.image} />
+              <View style={styles.infoContainer}>
+                <Text style={styles.name}>{item.name}</Text>
+                <Text style={styles.price}>{item.price}</Text>
+              </View>
+              <View style={styles.quantityContainer}>
+                <Button title="-" onPress={() => decreaseQuantity(item)} />
+                <Text style={styles.quantity}>{item.quantity}</Text>
+                <Button title="+" onPress={() => increaseQuantity(item)} />
+              </View>
+              <View style={styles.removeButton}>
+                <TouchableOpacity onPress={() => removeItem(item)} style={styles.removeButtonTouchable}>
+                  <Text style={styles.removeButtonText}>Remove</Text>
+                </TouchableOpacity>
+              </View>
             </View>
-            <View style={styles.quantityContainer}>
-              <Button title="-" onPress={() => decreaseQuantity(item)} />
-              <Text style={styles.quantity}>{item.quantity}</Text>
-              <Button title="+" onPress={() => increaseQuantity(item)} />
-            </View>
-            <View style={styles.removeButton}>
-              <Button title="Remove" onPress={() => removeItem(item)} />
-            </View>
-          </View>
+          </TouchableOpacity>
+        ))}
+        {/* Styling for "Add Item" button */}
+        <TouchableOpacity
+          style={styles.addButton}
+          onPress={() =>
+            addItem({
+              id: Math.random(),
+              name: 'New Item',
+              price: '$15',
+              image: 'https://www.bootdey.com/image/280x280/FFD700/000000',
+              quantity: 1,
+            })
+          }
+        >
+          <Text style={styles.buttonText}>Add Item</Text>
         </TouchableOpacity>
-      ))}
-      <Button title="Add Item" onPress={() => addItem({
-        id: Math.random(),
-        name: 'New Item',
-        price: '$15',
-        image: 'https://www.bootdey.com/image/280x280/FFD700/000000',
-        quantity: 1,
-      })} />
-      <Button title="Checkout" onPress={() => console.log('Checkout pressed')} />
-      
-      {/* Modal for viewing zoomed-in product image */}
-      <Modal
-        animationType="slide"
-        transparent={false}
-        visible={modalVisible}
-        onRequestClose={closeModal}
-      >
-        <View style={styles.modalContainer}>
-          <Image source={{ uri: selectedItem?.image }} style={styles.modalImage} />
-          <Button title="Close" onPress={closeModal} />
-        </View>
-      </Modal>
 
-      {/* Total Sum Section */}
-      <View style={styles.totalSumContainer}>
-        <Text style={styles.totalSumText}>Total: ${calculateTotalPrice()}</Text>
+        {/* Styling for "Checkout" button */}
+        <TouchableOpacity
+          style={styles.checkoutButton}
+          onPress={() => console.log('Checkout pressed')}
+        >
+          <Text style={styles.buttonText}>Checkout</Text>
+        </TouchableOpacity>
+
+        {/* Modal for viewing zoomed-in product image */}
+        <Modal
+          animationType="slide"
+          transparent={false}
+          visible={modalVisible}
+          onRequestClose={closeModal}
+        >
+          <View style={styles.modalContainer}>
+            <Image source={{ uri: selectedItem?.image }} style={styles.modalImage} />
+            <Button title="Close" onPress={closeModal} />
+          </View>
+        </Modal>
+
+        {/* Total Sum Section */}
+        <View style={styles.totalSumContainer}>
+          <Text style={styles.totalSumText}>Total: ${calculateTotalPrice()}</Text>
+        </View>
       </View>
-    </View>
     </ScrollView>
   );
 };
@@ -117,9 +143,8 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     paddingHorizontal: 10,
   },
-  ScrollView:{
-
-      width: '100%',
+  scrollView: {
+    width: '100%',
   },
   title: {
     fontSize: 24,
@@ -136,7 +161,7 @@ const styles = StyleSheet.create({
     elevation: 1,
     backgroundColor: '#fff',
     marginBottom: 10,
-    width:'100%'
+    width: '100%',
   },
   image: {
     width: 100,
@@ -156,6 +181,20 @@ const styles = StyleSheet.create({
   },
   removeButton: {
     alignItems: 'center',
+  },
+  removeButtonTouchable: {
+    backgroundColor: '#FF6347', // Tomato color
+    paddingVertical: 8,
+    paddingHorizontal: 15,
+    borderRadius: 5,
+    justifyContent: 'center', // Align text vertically
+    alignItems: 'center',
+    marginRight: 10, // Add margin for separation from quantity controls
+  },
+  removeButtonText: {
+    color: '#fff',
+    fontSize: 14,
+    fontWeight: 'bold',
   },
   quantityContainer: {
     flexDirection: 'row',
@@ -183,6 +222,25 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     color: 'green',
   },
-});
+  addButton: {
+    backgroundColor: '#4CAF50', // Green color
+    paddingVertical: 15,
+    paddingHorizontal: 30,
+    borderRadius: 5,
+    marginBottom: 10,
+    alignItems: 'center',
+  },
+  checkoutButton: {
+    backgroundColor: '#2196F3', // Blue color
+    paddingVertical: 15,
+    paddingHorizontal: 30,
+    borderRadius: 5,
+    marginBottom: 20,
+    alignItems: 'center',
+  },
+  buttonText: {
+    color: '#fff'
+  }
+  });
 
-export default ShoppingCart;
+  export default ShoppingCart;
