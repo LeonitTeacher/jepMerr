@@ -1,11 +1,12 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
 import ProductScreen from './screens/ProductScreen';
+import CartScreen from './screens/CartScreen';
 
 export default function App() {
   return (
     <View style={styles.container}>
-      <ProductScreen/>
+      <CartScreen/>
     </View>
   );
 }
