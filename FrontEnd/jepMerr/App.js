@@ -1,21 +1,26 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
-import ProductScreen from './screens/ProductScreen';
-import CartScreen from './screens/CartScreen';
+import React from 'react';
+import { DefaultTheme, Provider as PaperProvider } from 'react-native-paper';
+import { NavigationContainer } from '@react-navigation/native';
+import MyTabs from './navigation/BottomTab';
 
-export default function App() {
-  return (
-    <View style={styles.container}>
-      <CartScreen/>
-    </View>
-  );
-}
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+const theme = {
+  ...DefaultTheme,
+  roundness: 2,
+  colors: {
+    ...DefaultTheme.colors,
+    primary: '#3498db',
+    accent: '#f1c40f',
   },
-});
+};
+
+const App = () => {
+  return (
+    <PaperProvider theme={theme}>
+      <NavigationContainer>
+        <MyTabs />
+      </NavigationContainer>
+    </PaperProvider>
+  );
+};
+
+export default App;
