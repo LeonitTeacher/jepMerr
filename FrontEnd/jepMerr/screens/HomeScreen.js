@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { View, Text, FlatList, StyleSheet } from 'react-native';
 
-class ProductScreen extends Component {
+class Home extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -95,4 +95,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default ProductScreen;
+export default Home;
