@@ -13,7 +13,8 @@ class Product(models.Model):
     description = models.TextField()
     price = models.DecimalField(max_digits=10, decimal_places=2)
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
-    # You can add other fields like image, SKU, etc.
+    product_image=models.ImageField(upload_to='./Products/product_image')
+    
 
     def __str__(self):
         return self.name
