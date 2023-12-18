@@ -376,7 +376,7 @@ class ProductScreen extends Component {
 
                   </View>
                   <View style={styles.productName}>
-                    <Text style={{ fontSize: 16 }}>Samsung galaxy 23 Ultra +</Text>
+                    <Text style={{ fontSize: 16 }}>Samsung galaxy 23 Ultra</Text>
                   </View>
 
                   <View style={styles.productPrice}>
