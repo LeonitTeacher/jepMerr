@@ -5,6 +5,7 @@ import ProductScreen from '../screens/ProductScreen';
 import ShoppingCart from '../screens/CartScreen';
 import Profile from '../screens/ProfileScreen';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import AddCategoryScreen from '../screens/AddCategoryScreen';
 
 const Tab = createBottomTabNavigator();
 
@@ -46,6 +47,7 @@ const MyTabs = () => {
                     }}
                 />
                 <Tab.Screen
+                
                     name="Cart"
                     component={ShoppingCart}
                     options={{
@@ -62,6 +64,16 @@ const MyTabs = () => {
                         tabBarLabel: 'Profile',
                         tabBarIcon: ({ color, size }) => (
                             <Icon name="user-circle" size={size} color={color} />
+                        ),
+                    }}
+                />
+                <Tab.Screen
+                    name="Add Category"
+                    component={AddCategoryScreen}
+                    options={{
+                        tabBarLabel: 'Add Category',
+                        tabBarIcon: ({ color, size }) => (
+                            <Icon name="folder" size={size} color={color} />
                         ),
                     }}
                 />
