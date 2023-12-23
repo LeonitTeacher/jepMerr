@@ -78,7 +78,7 @@ const styles = StyleSheet.create({
     alignItems: 'flex-start',
     justifyContent: 'flex-start',
     padding: 16,
-    marginTop: 40,
+    paddingTop: 40,
     backgroundColor: '#33356d',
   },
   profileTitle: {
