@@ -1,30 +1,22 @@
-from Products.models import Product, Stock, Category, Purchase
+from Products.models import Product, Stock, Category, Purchase, User
 from rest_framework.views import APIView
 from Products.api.serializers import ProductSerializer, CategorySerializer, StockSerializer, PurchaseSerializer
 from rest_framework.response import Response
 from rest_framework import status
 from rest_framework import mixins, generics
-from rest_framework.permissions import IsAuthenticated
+from rest_framework.permissions import IsAuthenticated, IsAdminUser
 from rest_framework.parsers import MultiPartParser, FormParser
 
-class allProductsView(APIView):
-    def get(self, request):
-        product = Product.objects.all()
-        serialzer = ProductSerializer(product, many=True)
-        return Response(serialzer.data)
-
+class addProductsView(APIView):
+    permission_classes = [IsAuthenticated, IsAdminUser]
     def post(self, request):
         serializer = ProductSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data)
-        
-class ProductDetailsView(APIView):
-    def get(self, request, pk):
-        product = Product.objects.get(pk=pk)
-        serializer = ProductSerializer(product)
-        return Response(serializer.data)
-    
+
+class AdminProductDetailsView(APIView):
+    permission_classes = [IsAuthenticated, IsAdminUser]
     def put(self, request, pk):
         product = Product.objects.get(pk=pk)
         serializer = ProductSerializer(product, data=request.data)
@@ -36,6 +28,30 @@ class ProductDetailsView(APIView):
         product = Product.objects.get(pk=pk)
         product.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
+
+class allProductsView(APIView):
+    def get(self, request):
+        product = Product.objects.all()
+        serialzer = ProductSerializer(product, many=True)
+        return Response(serialzer.data)
+
+    
+class ProductDetailsView(APIView):
+    def get(self, request, pk):
+        product = Product.objects.get(pk=pk)
+        serializer = ProductSerializer(product)
+        return Response(serializer.data)
+    
+
+class addCategoryView(APIView):
+    permission_classes = [IsAuthenticated, IsAdminUser]
+    def post(self, request):
+        serializer = CategorySerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    
     
 class allCategoryView(APIView):
     parser_classes = (MultiPartParser, FormParser,)
@@ -44,12 +60,6 @@ class allCategoryView(APIView):
         serializer = CategorySerializer(product, many=True)
         return Response(serializer.data)
 
-    def post(self, request):
-        serializer = CategorySerializer(data=request.data)
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
         
 class CategoryDetailsView(APIView):
     def get(self, request, pk):
@@ -57,6 +67,9 @@ class CategoryDetailsView(APIView):
         serializer = CategorySerializer(category)
         return Response(serializer.data)
     
+
+class AdminCategoryDetailsView(APIView):
+    permission_classes = [IsAuthenticated, IsAdminUser]
     def put(self, request, pk):
         category = Category.objects.get(pk=pk)
         serializer = CategorySerializer(category, data=request.data)
