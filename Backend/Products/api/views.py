@@ -4,6 +4,8 @@ from Products.api.serializers import ProductSerializer, CategorySerializer, Stoc
 from rest_framework.response import Response
 from rest_framework import status
 from rest_framework import mixins, generics
+from rest_framework.permissions import IsAuthenticated
+from rest_framework.parsers import MultiPartParser, FormParser
 
 class allProductsView(APIView):
     def get(self, request):
@@ -36,16 +38,18 @@ class ProductDetailsView(APIView):
         return Response(status=status.HTTP_204_NO_CONTENT)
     
 class allCategoryView(APIView):
+    parser_classes = (MultiPartParser, FormParser,)
     def get(self, request):
         product = Category.objects.all()
-        serialzer = CategorySerializer(product, many=True)
-        return Response(serialzer.data)
+        serializer = CategorySerializer(product, many=True)
+        return Response(serializer.data)
 
     def post(self, request):
         serializer = CategorySerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
-            return Response(serializer.data)
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
         
 class CategoryDetailsView(APIView):
     def get(self, request, pk):
@@ -97,6 +101,7 @@ class StockDetailsView(APIView):
         return Response(status=status.HTTP_204_NO_CONTENT)
 
 class PurchaseView(APIView):
+    permission_classes = [IsAuthenticated]
     def post(self, request):
         serializer = PurchaseSerializer(data=request.data)
         if serializer.is_valid():

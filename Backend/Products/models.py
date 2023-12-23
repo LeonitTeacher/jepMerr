@@ -4,6 +4,7 @@ from django.contrib.auth.models import User
 class Category(models.Model):
     name = models.CharField(max_length=100)
     description = models.TextField()
+    category_image=models.ImageField("./Products/category_image")
 
     def __str__(self):
         return self.name
