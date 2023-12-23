@@ -17,7 +17,7 @@ const MyTabs = () => {
                 screenOptions={{
                     tabBarActiveTintColor: '#fff',
                     tabBarStyle: {
-                        backgroundColor: '#333',
+                        backgroundColor: '#33356d',
                         position: 'absolute',
                         bottom: 0,
                         left: '2.5%',

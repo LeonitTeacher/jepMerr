@@ -9,9 +9,13 @@ import {
   Image,
   TouchableOpacity,
   RefreshControl,
+  Modal
 } from "react-native";
 import { Searchbar } from "react-native-paper";
 import Icon from 'react-native-vector-icons/FontAwesome';
+import Swiper from 'react-native-swiper';
+import styles from "./css/ProductStyle";
+
 
 class ProductScreen extends Component {
   constructor(props) {
@@ -20,6 +24,7 @@ class ProductScreen extends Component {
       products: [],
       loading: true,
       refreshing: false,
+      modalVisible: false,
     };
   }
 
@@ -62,6 +67,15 @@ class ProductScreen extends Component {
   //   );
   // };
 
+
+  openModal = () => {
+    this.setState({ modalVisible: true });
+  };
+
+  closeModal = () => {
+    this.setState({ modalVisible: false });
+  };
+
   render() {
     const { products, loading, refreshing } = this.state;
 
@@ -70,26 +84,12 @@ class ProductScreen extends Component {
 
     return (
       <View style={styles.container}>
-        {/* {loading ? (
-          <Text style={styles.loadingText}>Loading...</Text>
-        ) : (
-          <FlatList
-            data={products}
-            renderItem={this.renderProductItem}
-            keyExtractor={(item) => item.id.toString()} // Assuming products have unique IDs
-            contentContainerStyle={styles.productList}
-          />
-        )} */}
-
-
         {/* Search product */}
         <View style={styles.searchContainer}>
           <Text style={styles.logo}>JepMerr</Text>
           <SafeAreaView>
             <Searchbar
               placeholder="Search product"
-              // value={searchQuery}
-              // onChangeText={(text) => setSearchQuery(text)}
               style={styles.searchInput}
             />
           </SafeAreaView>
@@ -97,11 +97,11 @@ class ProductScreen extends Component {
 
         <View style={styles.main}>
           {/* categories cards */}
-          <ScrollView 
+          <ScrollView
             refreshControl={
-            <RefreshControl refreshing={refreshing} onRefresh={this.onRefresh} />
-          }>
-            <Text style={{ fontSize: 22, fontWeight: "bold", padding: 20 }}>Categories</Text>
+              <RefreshControl refreshing={refreshing} onRefresh={this.onRefresh} />
+            }>
+            <Text style={{ fontSize: 22, fontWeight: "bold", padding: 20, color: '#fff' }}>Categories</Text>
             <ScrollView horizontal={true}>
               <View style={styles.categoryWrapper}>
                 <TouchableOpacity>
@@ -172,220 +172,100 @@ class ProductScreen extends Component {
 
 
             {/* products items */}
-            <Text style={{ fontSize: 22, fontWeight: "bold", padding: 20 }}>Products</Text>
+            <Text style={{ fontSize: 22, fontWeight: "bold", padding: 20, color: '#fff' }}>Products</Text>
             <View style={styles.products}>
               <View style={styles.productWrapper}>
-                <TouchableOpacity>
+                <TouchableOpacity onPress={this.openModal}>
                   <View style={styles.productImage}>
                     <Image
                       source={require('../assets/images/samsung2.jpg')}
                       style={{ width: '100%', height: '100%', borderRadius: 10 }}
                     />
-
                   </View>
                   <View style={styles.productName}>
-                    <Text style={{ fontSize: 16 }}>Samsung galaxy 23 Ultra</Text>
+                    <Text style={{ fontSize: 16, color: 'white' }}>Samsung galaxy 23 Ultra</Text>
                   </View>
 
                   <View style={styles.productPrice}>
-                    <Text style={{ fontSize: 16 }}>1500.00€</Text>
+                    <Text style={{ fontSize: 16, color: 'white' }}>1500.00€</Text>
                     <Text style={{ fontSize: 14, textDecorationLine: 'line-through', color: '#999' }}>1900.00€</Text>
                   </View>
+
                   <View style={styles.productAction}>
                     <TouchableOpacity style={styles.cartBtn}>
-                      <Text style={{ textAlign: 'center', color: '#000' }}>Add to cart</Text>
+                      <Text style={{ color: 'white' }}>Add to cart</Text>
                     </TouchableOpacity>
                   </View>
                 </TouchableOpacity>
               </View>
               <View style={styles.productWrapper}>
-                <TouchableOpacity>
+                <TouchableOpacity onPress={this.openModal}>
                   <View style={styles.productImage}>
                     <Image
                       source={require('../assets/images/samsung2.jpg')}
                       style={{ width: '100%', height: '100%', borderRadius: 10 }}
                     />
-
                   </View>
                   <View style={styles.productName}>
-                    <Text style={{ fontSize: 16 }}>Samsung galaxy 23 Ultra</Text>
+                    <Text style={{ fontSize: 16, color: 'white' }}>Samsung galaxy 23 Ultra</Text>
                   </View>
 
                   <View style={styles.productPrice}>
-                    <Text style={{ fontSize: 16 }}>1500.00€</Text>
+                    <Text style={{ fontSize: 16, color: 'white' }}>1500.00€</Text>
                     <Text style={{ fontSize: 14, textDecorationLine: 'line-through', color: '#999' }}>1900.00€</Text>
                   </View>
+
                   <View style={styles.productAction}>
                     <TouchableOpacity style={styles.cartBtn}>
-                      <Text style={{ textAlign: 'center', color: '#000' }}>Add to cart</Text>
+                      <Text style={{ color: 'white' }}>Add to cart</Text>
                     </TouchableOpacity>
                   </View>
                 </TouchableOpacity>
               </View>
               <View style={styles.productWrapper}>
-                <TouchableOpacity>
+                <TouchableOpacity onPress={this.openModal}>
                   <View style={styles.productImage}>
                     <Image
                       source={require('../assets/images/samsung2.jpg')}
                       style={{ width: '100%', height: '100%', borderRadius: 10 }}
                     />
-
                   </View>
                   <View style={styles.productName}>
-                    <Text style={{ fontSize: 16 }}>Samsung galaxy 23 Ultra</Text>
+                    <Text style={{ fontSize: 16, color: 'white' }}>Samsung galaxy 23 Ultra</Text>
                   </View>
 
                   <View style={styles.productPrice}>
-                    <Text style={{ fontSize: 16 }}>1500.00€</Text>
+                    <Text style={{ fontSize: 16, color: 'white' }}>1500.00€</Text>
                     <Text style={{ fontSize: 14, textDecorationLine: 'line-through', color: '#999' }}>1900.00€</Text>
                   </View>
+
                   <View style={styles.productAction}>
                     <TouchableOpacity style={styles.cartBtn}>
-                      <Text style={{ textAlign: 'center', color: '#000' }}>Add to cart</Text>
+                      <Text style={{ color: 'white' }}>Add to cart</Text>
                     </TouchableOpacity>
                   </View>
                 </TouchableOpacity>
               </View>
               <View style={styles.productWrapper}>
-                <TouchableOpacity>
+                <TouchableOpacity onPress={this.openModal}>
                   <View style={styles.productImage}>
                     <Image
                       source={require('../assets/images/samsung2.jpg')}
                       style={{ width: '100%', height: '100%', borderRadius: 10 }}
                     />
-
                   </View>
                   <View style={styles.productName}>
-                    <Text style={{ fontSize: 16 }}>Samsung galaxy 23 Ultra</Text>
+                    <Text style={{ fontSize: 16, color: 'white' }}>Samsung galaxy 23 Ultra</Text>
                   </View>
 
                   <View style={styles.productPrice}>
-                    <Text style={{ fontSize: 16 }}>1500.00€</Text>
+                    <Text style={{ fontSize: 16, color: 'white' }}>1500.00€</Text>
                     <Text style={{ fontSize: 14, textDecorationLine: 'line-through', color: '#999' }}>1900.00€</Text>
                   </View>
+
                   <View style={styles.productAction}>
                     <TouchableOpacity style={styles.cartBtn}>
-                      <Text style={{ textAlign: 'center', color: '#000' }}>Add to cart</Text>
-                    </TouchableOpacity>
-                  </View>
-                </TouchableOpacity>
-              </View>
-              <View style={styles.productWrapper}>
-                <TouchableOpacity>
-                  <View style={styles.productImage}>
-                    <Image
-                      source={require('../assets/images/samsung2.jpg')}
-                      style={{ width: '100%', height: '100%', borderRadius: 10 }}
-                    />
-
-                  </View>
-                  <View style={styles.productName}>
-                    <Text style={{ fontSize: 16 }}>Samsung galaxy 23 Ultra</Text>
-                  </View>
-
-                  <View style={styles.productPrice}>
-                    <Text style={{ fontSize: 16 }}>1500.00€</Text>
-                    <Text style={{ fontSize: 14, textDecorationLine: 'line-through', color: '#999' }}>1900.00€</Text>
-                  </View>
-                  <View style={styles.productAction}>
-                    <TouchableOpacity style={styles.cartBtn}>
-                      <Text style={{ textAlign: 'center', color: '#000' }}>Add to cart</Text>
-                    </TouchableOpacity>
-                  </View>
-                </TouchableOpacity>
-              </View>
-              <View style={styles.productWrapper}>
-                <TouchableOpacity>
-                  <View style={styles.productImage}>
-                    <Image
-                      source={require('../assets/images/samsung2.jpg')}
-                      style={{ width: '100%', height: '100%', borderRadius: 10 }}
-                    />
-
-                  </View>
-                  <View style={styles.productName}>
-                    <Text style={{ fontSize: 16 }}>Samsung galaxy 23 Ultra</Text>
-                  </View>
-
-                  <View style={styles.productPrice}>
-                    <Text style={{ fontSize: 16 }}>1500.00€</Text>
-                    <Text style={{ fontSize: 14, textDecorationLine: 'line-through', color: '#999' }}>1900.00€</Text>
-                  </View>
-                  <View style={styles.productAction}>
-                    <TouchableOpacity style={styles.cartBtn}>
-                      <Text style={{ textAlign: 'center', color: '#000' }}>Add to cart</Text>
-                    </TouchableOpacity>
-                  </View>
-                </TouchableOpacity>
-              </View>
-              <View style={styles.productWrapper}>
-                <TouchableOpacity>
-                  <View style={styles.productImage}>
-                    <Image
-                      source={require('../assets/images/samsung2.jpg')}
-                      style={{ width: '100%', height: '100%', borderRadius: 10 }}
-                    />
-
-                  </View>
-                  <View style={styles.productName}>
-                    <Text style={{ fontSize: 16 }}>Samsung galaxy 23 Ultra</Text>
-                  </View>
-
-                  <View style={styles.productPrice}>
-                    <Text style={{ fontSize: 16 }}>1500.00€</Text>
-                    <Text style={{ fontSize: 14, textDecorationLine: 'line-through', color: '#999' }}>1900.00€</Text>
-                  </View>
-                  <View style={styles.productAction}>
-                    <TouchableOpacity style={styles.cartBtn}>
-                      <Text style={{ textAlign: 'center', color: '#000' }}>Add to cart</Text>
-                    </TouchableOpacity>
-                  </View>
-                </TouchableOpacity>
-              </View>
-              <View style={styles.productWrapper}>
-                <TouchableOpacity>
-                  <View style={styles.productImage}>
-                    <Image
-                      source={require('../assets/images/samsung2.jpg')}
-                      style={{ width: '100%', height: '100%', borderRadius: 10 }}
-                    />
-
-                  </View>
-                  <View style={styles.productName}>
-                    <Text style={{ fontSize: 16 }}>Samsung galaxy 23 Ultra</Text>
-                  </View>
-
-                  <View style={styles.productPrice}>
-                    <Text style={{ fontSize: 16 }}>1500.00€</Text>
-                    <Text style={{ fontSize: 14, textDecorationLine: 'line-through', color: '#999' }}>1900.00€</Text>
-                  </View>
-                  <View style={styles.productAction}>
-                    <TouchableOpacity style={styles.cartBtn}>
-                      <Text style={{ textAlign: 'center', color: '#000' }}>Add to cart</Text>
-                    </TouchableOpacity>
-                  </View>
-                </TouchableOpacity>
-              </View>
-              <View style={styles.productWrapper}>
-                <TouchableOpacity>
-                  <View style={styles.productImage}>
-                    <Image
-                      source={require('../assets/images/samsung2.jpg')}
-                      style={{ width: '100%', height: '100%', borderRadius: 10 }}
-                    />
-
-                  </View>
-                  <View style={styles.productName}>
-                    <Text style={{ fontSize: 16 }}>Samsung galaxy 23 Ultra</Text>
-                  </View>
-
-                  <View style={styles.productPrice}>
-                    <Text style={{ fontSize: 16 }}>1500.00€</Text>
-                    <Text style={{ fontSize: 14, textDecorationLine: 'line-through', color: '#999' }}>1900.00€</Text>
-                  </View>
-                  <View style={styles.productAction}>
-                    <TouchableOpacity style={styles.cartBtn}>
-                      <Text style={{ textAlign: 'center', color: '#000' }}>Add to cart</Text>
+                      <Text style={{ color: 'white' }}>Add to cart</Text>
                     </TouchableOpacity>
                   </View>
                 </TouchableOpacity>
@@ -393,147 +273,65 @@ class ProductScreen extends Component {
             </View>
           </ScrollView>
         </View>
+
+        <Modal
+          animationType="slide"
+          transparent={true}
+          visible={this.state.modalVisible}
+          onRequestClose={this.closeModal}
+        >
+          <View style={styles.modalContainer}>
+            <View style={styles.modalContent}>
+              <TouchableOpacity style={styles.modalCloseButton} onPress={this.closeModal}>
+                <Icon name="long-arrow-left" color={'#33356d'} size={30} />
+              </TouchableOpacity>
+
+              <Swiper style={styles.swipperWrapper} showsButtons={false} loop={false}>
+                <View style={styles.slide}>
+                  <Image source={require('../assets/images/samsung2.jpg')} style={styles.imageSwipper} />
+                </View>
+                <View style={styles.slide}>
+                  <Image source={require('../assets/images/samsung2.jpg')} style={styles.imageSwipper} />
+                </View>
+                <View style={styles.slide}>
+                  <Image source={require('../assets/images/samsung2.jpg')} style={styles.imageSwipper} />
+                </View>
+                <View style={styles.slide}>
+                  <Image source={require('../assets/images/samsung2.jpg')} style={styles.imageSwipper} />
+                </View>
+              </Swiper>
+
+              <View style={styles.productDetails}>
+                <Text style={styles.productTitleText}>Samsung galaxy 23 Ultra</Text>
+                <View style={{ flexDirection: 'row', alignItems: 'flex-end', height: 30, gap: 10, marginBottom: 10 }}>
+                  <Text style={{ fontSize: 18, color: 'white' }}>1500.00€</Text>
+                  <Text style={{ fontSize: 16, textDecorationLine: 'line-through', color: '#999' }}>1900.00€</Text>
+                </View>
+                <ScrollView>
+                  <Text style={styles.productDesceription}>
+                    Introducing the Samsung Galaxy S23 Ultra, the pinnacle of innovation and cutting-edge technology. Boasting a stunning design and a vibrant, high-resolution display, the Galaxy S23 Ultra offers an immersive visual experience. Equipped with a powerful and efficient processor, it ensures seamless multitasking and enhanced performance for demanding applications.
+                  </Text>
+                </ScrollView>
+              </View>
+
+              <View style={styles.singleAction}>
+                <TouchableOpacity style={styles.addToCart}>
+                  <Text style={{ color: 'white' }}>Add to cart</Text>
+                  <Icon name="shopping-cart" color={'white'} size={20} />
+                </TouchableOpacity>
+                <TouchableOpacity style={styles.buyNow}>
+                  <Text style={{ color: '#33356d'}}>Buy now </Text>
+                  <Icon name="credit-card" size={20} color={'#33356d'} />
+                </TouchableOpacity>
+              </View>
+            </View>
+          </View>
+        </Modal>
       </View>
     );
   }
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    // paddingHorizontal: 20,
-    // paddingTop: 20,
-    backgroundColor: "#F5F5F5",
-    marginTop: 20,
-  },
-  productList: {
-    paddingBottom: 20,
-  },
-  productItem: {
-    backgroundColor: "#FFFFFF",
-    borderBottomWidth: 1,
-    borderBottomColor: "#E0E0E0",
-    paddingVertical: 15,
-    paddingHorizontal: 10,
-    marginBottom: 10,
-    borderRadius: 8,
-  },
-  title: {
-    fontSize: 18,
-    fontWeight: "bold",
-    marginBottom: 5,
-  },
-  description: {
-    fontSize: 14,
-    color: "#666666",
-    marginBottom: 5,
-  },
-  price: {
-    fontSize: 16,
-    fontWeight: "bold",
-    color: "#2196F3",
-  },
-  loadingText: {
-    fontSize: 20,
-    alignSelf: "center",
-  },
-  searchContainer: {
-    width: "100%",
-    backgroundColor: "#fff",
-    padding: 20,
-    borderBottomRightRadius: 30,
-    borderBottomLeftRadius: 30,
-  },
-  searchInput: {
-    backgroundColor: "#f3f3f3",
-  },
-  logo: {
-    fontSize: 28,
-    textAlign: "center",
-    letterSpacing: 2,
-    marginBottom: 20,
-    fontWeight: 'bold'
-  },
-  main: {
-    marginTop: 15,
-    paddingBottom: 250,
-    borderTopLeftRadius: 30,
-    borderTopRightRadius: 30,
-    backgroundColor: "#fff",
-    height: '100%'
-    // padding: 20,
-  },
-  categoryWrapper: {
-    width: 120,
-    height: 120,
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginTop: 20,
-    marginBottom: 20,
-  },
-  categoryImage: {
-    backgroundColor: '#f3f3f3',
-    padding: 15,
-    borderRadius: 100,
-    marginBottom: 10
-  },
-  categoryText: {
-    textAlign: 'center'
-  },
-  products: {
-    marginTop: 20,
-    padding: 20,
-    flex: 1,
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    gap: 10
-  },
-  productWrapper: {
-    width: 180,
-    backgroundColor: '#f3f3f3',
-    borderRadius: 10,
-    padding: 10
-  },
-  productImage: {
-    height: 150,
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    position: 'relative'
 
-  },
-  favorite: {
-    position: 'absolute',
-    top: 10,
-    right: 10,
-    zIndex: 2,
-    backgroundColor: '#f3f3f3',
-    padding: 5,
-    borderRadius: 50
-  },
-  productName: {
-    marginTop: 10,
-  },
-
-  productPrice: {
-    flex: 1,
-    flexDirection: 'row',
-    alignItems: 'flex-end',
-    gap: 10,
-    marginTop: 10
-  },
-  productAction: {
-    marginTop: 10
-  },
-  cartBtn: {
-    width: '100%',
-    height: 40,
-    backgroundColor: "#c3e703",
-    justifyContent: 'center',
-    alignItems: 'center',
-    borderRadius: 10
-  }
-});
 
 export default ProductScreen;
