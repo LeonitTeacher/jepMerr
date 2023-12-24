@@ -128,7 +128,7 @@ STATIC_URL = "static/"
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 # Corsheaders settings
-ALLOWED_HOSTS = ['127.0.0.1', 'localhost','192.168.200.65','192.168.200.140']
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost','192.168.200.65','123.123.123']
 CORS_ORIGIN_ALLOW_ALL = True # Change it in production and specify your own origins
 
 REST_FRAMEWORK = {
