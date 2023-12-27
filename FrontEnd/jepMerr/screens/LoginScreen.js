@@ -17,7 +17,7 @@ const LoginScreen = (props) => {
 
   const handleLogin = () => {
     // Your API endpoint for login
-    const apiUrl = 'http://test:8000/account/login/';
+    const apiUrl = 'http://192.168.200.199:8000/account/login/';
 
     // Data to be sent in the POST request
     const data = {
